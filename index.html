@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: black;
+      color: white;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    form {
+      width: 300px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: black;
+    }
+
+    .logo {
+      background-color: #333; /* Sample background color */
+      margin: 0 auto 20px; /* Center the logo and add bottom margin */
+    }
+
+    .img-logo {
+      background-color: #333; /* Sample background color */
+      margin: 0 auto 20px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: calc(100% - 16px);
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+      background-color: white;
+      color: black;
+      border: none;
+      border-radius: 3px;
+    }
+
+    button {
+      width: calc(100% - 16px);
+      padding: 10px;
+      background-color: #4caf50; /* Green color */
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .forgot-password {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .forgot-password a {
+      color: #999;
+      text-decoration: none;
+    }
+
+    .forgot-password a:hover {
+      color: #ccc;
+    }
+
+    /* Dashboard Styles */
+    .dashboard {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      color: black;
+      background-color: white; /* Set the background color to white */
+    }
+
+    .chart {
+      width: 80%;
+      max-width: 600px;
+      margin-top: 20px;
+    }
+    .bar-graph .year {
+  -webkit-animation: fade-in-text 2.2s 0.1s forwards;
+  -moz-animation: fade-in-text 2.2s 0.1s forwards;
+  animation: fade-in-text 2.2s 0.1s forwards;
+  opacity: 0;
+}
+.bar-graph-one{
+  margin-right: 80%;
+  align-content: baseline;
+}
+
+.bar-graph-horizontal {
+  max-width: 380px;
+}
+
+.bar-graph-horizontal > div {
+  float: left;
+  margin-bottom: 8px;
+  width: 100%;
+}
+
+.bar-graph-horizontal .year {
+  float: left;
+  margin-top: 18px;
+  width: 50px;
+}
+
+.bar-graph-horizontal .bar {
+  border-radius: 3px;
+  height: 55px;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  width: 0;
+}
+
+.bar-graph-one .bar::after {
+  -webkit-animation: fade-in-text 2.2s 0.1s forwards;
+  -moz-animation: fade-in-text 2.2s 0.1s forwards;
+  animation: fade-in-text 2.2s 0.1s forwards;
+  color: #fff;
+  content: attr(data-percentage);
+  font-weight: 700;
+  position: absolute;
+  right: 16px;
+  top: 17px;
+}
+
+.bar-graph-one .bar-one .bar {
+  background-color: #64b2d1;
+  -webkit-animation: show-bar-one 1.2s 0.1s forwards;
+  -moz-animation: show-bar-one 1.2s 0.1s forwards;
+  animation: show-bar-one 1.2s 0.1s forwards;
+}
+
+.bar-graph-one .bar-two .bar {
+  background-color: #5292ac;
+  -webkit-animation: show-bar-two 1.2s 0.2s forwards;
+  -moz-animation: show-bar-two 1.2s 0.2s forwards;
+  animation: show-bar-two 1.2s 0.2s forwards;
+}
+
+.bar-graph-one .bar-three .bar {
+  background-color: #407286;
+  -webkit-animation: show-bar-three 1.2s 0.3s forwards;
+  -moz-animation: show-bar-three 1.2s 0.3s forwards;
+  animation: show-bar-three 1.2s 0.3s forwards;
+}
+
+.bar-graph-one .bar-four .bar {
+  background-color: #2e515f;
+  -webkit-animation: show-bar-four 1.2s 0.4s forwards;
+  -moz-animation: show-bar-four 1.2s 0.4s forwards;
+  animation: show-bar-four 1.2s 0.4s forwards;
+}
+
+/* Bar Graph Horizontal Animations */
+@-webkit-keyframes show-bar-one {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 69.6%;
+  }
+}
+
+@-webkit-keyframes show-bar-two {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 71%;
+  }
+}
+
+@-webkit-keyframes show-bar-three {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 74.7%;
+  }
+}
+
+@-webkit-keyframes show-bar-four {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 76.8%;
+  }
+}
+
+@-webkit-keyframes fade-in-text {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <div class="container" id="login-container">
+    <form id="login-form">
+      <div class="logo">
+        <img class="img-logo" src="logo.png" alt="">
+      </div>
+
+      <label for="username">Username (Email):</label>
+      <input type="text" id="username" name="username" required>
+
+      <label for="password-input">Password:</label>
+      <input type="password" id="password-input" name="password-input" required>
+
+      <button type="button" onclick="validateLogin()">Login</button>
+
+      <div class="forgot-password">
+        <a href="#">Forgot Your Password?</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Dashboard Section -->
+  <div class="dashboard" id="dashboard-container">
+    <h1 style="color: #45a049;">Welcome to SMARTSERV</h1>
+    <section class="bar-graph bar-graph-horizontal bar-graph-one">
+      <div class="bar-one">
+        <span class="year">2019</span>
+        <div class="bar" data-percentage="69.6%"></div>
+      </div>
+      <div class="bar-two">
+        <span class="year">2018</span>
+        <div class="bar" data-percentage="71%"></div>
+      </div>
+      <div class="bar-three">
+        <span class="year">2017</span>
+        <div class="bar" data-percentage="74.7%"></div>
+      </div>
+      
+    </section>
+  </div>
+
+  <script>
+    function validateLogin() {
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password-input').value;
+
+      // Email validation
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(username)) {
+        alert('Invalid email format');
+        return;
+      }
+
+      // Password validation
+      if (password !== 'SmartServTest@123') {
+        alert('Incorrect password. Please enter the correct password.');
+        return;
+      }
+
+      // Successful login
+      alert('Login successful!!');
+      showDashboard();
+    }
+
+    function showDashboard() {
+      // Hide login container
+      document.getElementById('login-container').style.display = 'none';
+
+      // Show dashboard container
+      document.getElementById('dashboard-container').style.display = 'flex';
+
+      // Dummy data for the chart
+      var chartData = {
+        labels: ['Category 1', 'Category 2', 'Category 3'],
+        datasets: [{
+          label: 'Horizontal Bar Chart',
+          data: [10, 20, 30],
+          backgroundColor: ['rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 0.2)'],
+          borderColor: ['rgba(75, 192, 192, 1)', 'rgba(75, 192, 192, 1)', 'rgba(75, 192, 192, 1)'],
+          borderWidth: 1
+        }]
+      };
+
+      // Get the canvas element
+      var ctx = document.getElementById('bar-chart').getContext('2d');
+
+      // Create a horizontal bar chart
+      var myChart = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: chartData,
+        options: {
+          scales: {
+            x: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
